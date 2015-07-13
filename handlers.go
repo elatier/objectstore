@@ -27,21 +27,6 @@ func (o ObjectResource) listObjects(request *restful.Request, response *restful.
 	response.WriteEntity(values)
 }
 
-func (o *ObjectResource) createObject(request *restful.Request, response *restful.Response) {
-	obj := new(Object)
-	err := request.ReadEntity(obj)
-	if err != nil {
-		response.AddHeader("Content-Type", "text/plain")
-		response.WriteErrorString(http.StatusInternalServerError, err.Error())
-		return
-	}
-	obj.Id = strconv.Itoa(len(o.objects) + 1) // simple id generation
-	obj.Version = 0
-	o.objects[obj.Id] = *obj
-	response.WriteHeader(http.StatusCreated)
-	response.WriteEntity(obj)
-}
-
 func (o *ObjectResource) updateObject(request *restful.Request, response *restful.Response) {
 	id := request.PathParameter("object-id")
 	curObj := o.objects[id]
@@ -67,4 +52,19 @@ func (o *ObjectResource) updateObject(request *restful.Request, response *restfu
 	newObj.Version += 1
 	o.objects[newObj.Id] = *newObj
 	response.WriteEntity(newObj)
+}
+
+func (o *ObjectResource) createObject(request *restful.Request, response *restful.Response) {
+	obj := new(Object)
+	err := request.ReadEntity(obj)
+	if err != nil {
+		response.AddHeader("Content-Type", "text/plain")
+		response.WriteErrorString(http.StatusInternalServerError, err.Error())
+		return
+	}
+	obj.Id = strconv.Itoa(len(o.objects) + 1) // simple id generation
+	obj.Version = 0
+	o.objects[obj.Id] = *obj
+	response.WriteHeader(http.StatusCreated)
+	response.WriteEntity(obj)
 }

@@ -21,7 +21,7 @@ type ObjectResource struct {
 func (o ObjectResource) Register(container *restful.Container) {
 	ws := new(restful.WebService)
 	ws.
-		Path("/tables/usergraph/objects").
+		Path("/tables/usergraph/objects"). //placeholder for enabling multiple sets (table) of objects
 		Doc("Manage Objects").
 		Consumes(restful.MIME_JSON, restful.MIME_XML).
 		Produces(restful.MIME_JSON, restful.MIME_XML) // you can specify this per route as well
