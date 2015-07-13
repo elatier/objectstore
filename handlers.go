@@ -36,7 +36,7 @@ func (o *ObjectResource) createObject(request *restful.Request, response *restfu
 		return
 	}
 	obj.Id = strconv.Itoa(len(o.objects) + 1) // simple id generation
-	obj.Version = 0;
+	obj.Version = 0
 	o.objects[obj.Id] = *obj
 	response.WriteHeader(http.StatusCreated)
 	response.WriteEntity(obj)

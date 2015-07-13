@@ -9,9 +9,9 @@ import (
 )
 
 type Object struct {
-	Id   string `json:"id"`
-	Data interface{} `json:"data"`
-	Version int `json:"version"`
+	Id      string      `json:"id"`
+	Data    interface{} `json:"data"`
+	Version int         `json:"version"`
 }
 
 type ObjectResource struct {
