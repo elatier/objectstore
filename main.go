@@ -31,6 +31,7 @@ func (o ObjectResource) Register(container *restful.Container) {
 		Doc("get an object").
 		Operation("findObject").
 		Param(ws.PathParameter("object-id", "identifier of the object").DataType("string")).
+		ReturnsError(404, "Object could not be found", nil).
 		Writes(Object{})) // on the response
 
 	ws.Route(ws.GET("").To(o.listObjects).
